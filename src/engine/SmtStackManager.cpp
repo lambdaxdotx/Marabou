@@ -102,7 +102,12 @@ void SmtStackManager::storeSmtState( SmtState& smtState )
 
 void SmtStackManager::recordImpliedValidSplit( PiecewiseLinearCaseSplit& validSplit )
 {
-    _stack.back()->_impliedValidSplits.append( validSplit );
+    if ( _stack.empty() )
+        _impliedValidSplitsAtRoot.append( validSplit );
+    else
+        _stack.back()->_impliedValidSplits.append( validSplit );
+
+
 
     checkSkewFromDebuggingSolution();
 }
